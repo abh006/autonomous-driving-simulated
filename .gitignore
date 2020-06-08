@@ -16,6 +16,11 @@ model-*.h5
 # video files created
 *.mp4
 
+# image files and csv files for training
+*.jpg
+*.png
+*.csv
+
 # train data
 data/
 
