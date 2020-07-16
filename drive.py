@@ -53,24 +53,18 @@ def telemetry(sid, data):
             X = np.asarray([preprocessed])
             
             # predict the steering angle for the image
-            predicted_steering_angle = float(model.predict(X)[0])
-            print("Predicted angle: ", predicted_steering_angle)
+            steering_angle = float(model.predict(X)[0])
+            print("Predicted angle: ", steering_angle)
             
             # normalise angle 
             # udacity simulator supports steering from -25 to +25
             # model gives angle from 45 to 135
-            # if x is the predicted angle, x_dash = -25 + (x-45) * 0.56 
+            display_heading_line(img, steering_angle-90).save('IMG/{}.jpg'.format( datetime.now()))
+            diff = steering_angle - 90
+            steering_angle = 0.56 * diff
             
-            steering_angle = -25 + (predicted_steering_angle-45) * 5/9
-            steering_angle = int(steering_angle)
-            # steering_angle = (predicted_steering_angle+90)*5/9
-            # steering_angle = 95/9 * predicted_steering_angle - 50
-            # steering_angle %= 180
-            # steering_angle = 0.555061 * predicted_steering_angle-49.946048804
             print("Steering angle ", steering_angle)
-
             # img.save('IMG/{}.jpg'.format( datetime.now()))
-            # display_heading_line(img, steering_angle).save('IMG/{}.jpg'.format( datetime.now()))
             
             # lower the throttle as the speed increases
             # if the speed is above the current speed limit, we are on a downhill.

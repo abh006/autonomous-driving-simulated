@@ -1,0 +1,8 @@
+version: '3.5'
+services:
+    app:
+        build: .
+        command: python drive.py model-new.h5
+        ports: 
+            - "4567:4567"
+        
